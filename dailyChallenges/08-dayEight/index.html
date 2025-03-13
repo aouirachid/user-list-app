@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Render a Todo List</title>
+    <style>
+      .todo-item {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      .toggleBtn {
+        cursor: pointer;
+      }
+      .todo-item[data-completed="true"] {
+        background: #e3ffe3; /* Green background for completed */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Todo List</h1>
+    <div id="todoContainer"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
