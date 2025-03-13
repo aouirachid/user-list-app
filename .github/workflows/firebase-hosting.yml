@@ -1,0 +1,17 @@
+name: Deploy to Firebase Hosting
+on:
+  push:
+    branches: [main] # Trigger on pushes to the "main" branch
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest # Use a Linux machine
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Pull your code from GitHub
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}" # GitHub token (auto-generated)
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" # Your Firebase secret
+          projectId: user-list-app-c6bbd # Replace with your Firebase project ID
