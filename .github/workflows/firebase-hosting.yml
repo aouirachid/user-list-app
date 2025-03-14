@@ -12,5 +12,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           projectId: user-list-app-c6bbd
-          # Remove the line below to deploy to the live site
-          # channelId: live  # ❌ Delete this line!
+          target: 'hosting'
+          channelId: 'live'
