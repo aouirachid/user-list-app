@@ -98,9 +98,9 @@ function renderUser(users) {
   users.forEach((user) => {
     userContainer.innerHTML += `
       <div class="user-card">
-        <h3>${user.name}</h3>
-        <p>Email: ${user.email}</p>
-        <p>Username: ${user.username}</p>
+        <h3>${user.name || "Unknown Name"}</h3>
+        <p>Email: ${user.email || "No email"}</p>
+        <p>Username: ${user.username || "Anonymous"}</p>
         <button class="editBtn" data-id="${user.id}">Edit</button>
         <button class="deleteBtn" data-id="${user.id}">Delete</button>
       </div>
@@ -207,11 +207,16 @@ userContainer.addEventListener("click", (e) => {
 
 searchInput.addEventListener("input", (e) => {
   const searchTerm = e.target.value.toLowerCase().trim();
-  const filteredUsers = currentUsers.filter(
-    (user) =>
-      user.name.toLowerCase().includes(searchTerm) ||
-      user.email.toLowerCase().includes(searchTerm) ||
-      user.username.toLowerCase().includes(searchTerm),
-  );
+  const filteredUsers = currentUsers.filter((user) => {
+    const name = user.name?.toLowerCase() || "";
+    const email = user.email?.toLowerCase() || "";
+    const username = user.username?.toLowerCase() || "";
+
+    return (
+      name.includes(searchTerm) ||
+      email.includes(searchTerm) ||
+      username.includes(searchTerm)
+    );
+  });
   renderUser(filteredUsers);
 });
