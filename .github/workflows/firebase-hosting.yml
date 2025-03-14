@@ -10,7 +10,15 @@ jobs:
         uses: actions/checkout@v4
       - name: Create Firebase Config
         run: |
-          echo "export const firebaseConfig = ${{secrets.FIREBASE_CONFIG}}" > public/config.js
+          echo "export const firebaseConfig = {
+                apiKey: '${{ secrets.FIREBASE_API_KEY }}',
+                authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN }}',
+                projectId: '${{ secrets.FIREBASE_PROJECT_ID }}',
+                storageBucket: '${{ secrets.FIREBASE_STORAGE_BUCKET }}',
+                messagingSenderId: '${{ secrets.FIREBASE_SENDER_ID }}',
+                appId: '${{ secrets.FIREBASE_APP_ID }}',
+                measurementId: '${{ secrets.FIREBASE_MEASUREMENT_ID }}'
+              };" > public/config.js
 
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
