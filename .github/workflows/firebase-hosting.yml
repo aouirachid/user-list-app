@@ -18,8 +18,11 @@ jobs:
                 messagingSenderId: '${{ secrets.FIREBASE_SENDER_ID }}',
                 appId: '${{ secrets.FIREBASE_APP_ID }}',
                 measurementId: '${{ secrets.FIREBASE_MEASUREMENT_ID }}'
-              };" > public/config.js
-
+              };" > ./public/config.js
+      - name: Verify Files
+        run: |
+          ls -la ./public/
+          cat ./public/config.js
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
