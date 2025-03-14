@@ -16,15 +16,7 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "user-list-app-c6bbd.firebaseapp.com",
-  projectId: "user-list-app-c6bbd",
-  storageBucket: "user-list-app-c6bbd.firebasestorage.app",
-  messagingSenderId: "158601328577",
-  appId: "1:158601328577:web:c297a012303c239b842140",
-  measurementId: "G-6JDVLM9KWV", // Optional
-};
+const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

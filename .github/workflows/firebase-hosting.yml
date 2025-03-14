@@ -9,10 +9,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up environment
-        env:
-          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
-        run: echo "FIREBASE_API_KEY=${FIREBASE_API_KEY}" >> $GITHUB_ENV
+      - name: Create .env file
+        run: echo "FIREBASE_CONFIG='${{ secrets.FIREBASE_CONFIG }}'" > .env
 
       - name: Deploy to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
