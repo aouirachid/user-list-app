@@ -15,8 +15,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-const firebaseConfig = JSON.parse(import.meta.env.VITE_FIREBASE_CONFIG);
+import { firebaseConfig } from "../config";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
