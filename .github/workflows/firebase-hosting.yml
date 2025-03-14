@@ -1,17 +1,15 @@
+# .github/workflows/firebase-hosting.yml
 name: Deploy to Firebase Hosting
 on:
   push:
-    branches: [main] # Trigger on pushes to the "main" branch
+    branches: [main]
 jobs:
-  build_and_deploy:
-    runs-on: ubuntu-latest # Use a Linux machine
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4 # Pull your code from GitHub
-
-      - name: Deploy to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: actions/checkout@v4
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}" # GitHub token (auto-generated)
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" # Your Firebase secret
-          projectId: user-list-app-c6bbd # Replace with your Firebase project ID
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          projectId: user-list-app-c6bbd  # ✅ Correct project ID
