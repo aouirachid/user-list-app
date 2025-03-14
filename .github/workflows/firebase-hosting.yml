@@ -1,23 +1,24 @@
 name: Deploy to Firebase Hosting
-
 on:
   push:
     branches: [main]
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
+
       - name: Set up environment
         env:
           FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
         run: echo "FIREBASE_API_KEY=${FIREBASE_API_KEY}" >> $GITHUB_ENV
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          channelId: live
-          projectId: user-list-app-c6bbd
+          projectId: 'user-list-app-c6bbd'
+          target: 'hosting'
+          channelId: 'live'
