@@ -57,3 +57,25 @@ export const setupUserForm = () => {
     }
   });
 };
+export const setupSearch = () => {
+  const searchInput = document.getElementById("searchInput");
+  const debounce = (fun, delay) => {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => fun(...args), delay);
+    };
+  };
+  const handelSearch = (e) => {
+    const term = e.target.value.toLowerCase().trim();
+    const filterd = store.getUsers().filter((user) => {
+      const matchedName = user.name?.toLowerCase().includes(term);
+      const matchedEmail = user.email?.toLowerCase().includes(term);
+      const matchedUsername = user.username?.toLowerCase().includes(term);
+      return matchedName || matchedEmail || matchedUsername;
+    });
+    renderUsers(filterd);
+  };
+  searchInput.addEventListener("input", debounce(handelSearch, 300));
+};
+
