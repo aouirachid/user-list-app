@@ -34,9 +34,9 @@ export const showAuthError = (message) => {
 
 export const showFormError = (message) => {
   const feedback = document.getElementById("feedback");
+  feedback.innerHTML = message.replace(/\n/g, "<br>");
   feedback.style.color = "red";
-  feedback.textContent = message;
-  setTimeout(() => (feedback.textContent = ""), 3000);
+  setTimeout(() => (feedback.innerHTML = ""), 3000);
 };
 
 export const showFormSuccess = (message) => {

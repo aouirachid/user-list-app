@@ -16,10 +16,16 @@ export const setupUserForm = () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = {
-      name: form.name.value,
-      email: form.email.value,
-      username: form.username.value,
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      username: form.username.value.trim(),
     };
+    const validation = validateUserInput(data);
+    //console.log(!validation.isValid);
+    if (!validation.isValid) {
+      showFormError(validation.errors.join("\n"));
+      return;
+    }
 
     try {
       if (editingId) {
@@ -79,3 +85,25 @@ export const setupSearch = () => {
   searchInput.addEventListener("input", debounce(handelSearch, 300));
 };
 
+const validateUserInput = (data) => {
+  const errors = [];
+  if (!data.name || data.name.length < 2 || data.name.length > 30) {
+    errors.push("invalid name, he must be between 2 and 30 character");
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    errors.push("Invalid email format");
+  }
+
+  if (
+    !data.username ||
+    data.username.length < 3 ||
+    data.username.length > 20 ||
+    /\s/.test(data.username)
+  ) {
+    errors.push("Username must be 3-20 characters without spaces");
+  }
+  return {
+    isValid: errors.length === 0,
+    errors,
+  };
+};
