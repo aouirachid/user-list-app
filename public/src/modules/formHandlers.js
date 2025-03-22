@@ -28,6 +28,7 @@ export const setupUserForm = () => {
     }
 
     try {
+      store.setLoading(true);
       if (editingId) {
         await updateUser(editingId, data);
         showFormSuccess("User updated successfully ✅");
@@ -39,15 +40,22 @@ export const setupUserForm = () => {
       form.reset();
     } catch (error) {
       showFormError(error.message);
+    } finally {
+      store.setLoading(false);
     }
   });
 
-  userContainer.addEventListener("click", (e) => {
+  userContainer.addEventListener("click", async (e) => {
     const currentUsers = store.getUsers(); // Get latest state
 
     if (e.target.classList.contains("deleteBtn")) {
-      if (confirm("Delete this user?")) {
-        deleteUser(e.target.dataset.id);
+      try {
+        if (confirm("Delete this user?")) {
+          store.setLoading(true);
+          await deleteUser(e.target.dataset.id);
+        }
+      } finally {
+        store.setLoading(false);
       }
     }
 

@@ -4,8 +4,10 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "../../fireBase.js";
+import { store } from "./state.js";
 import { showAuthUI, hideAuthUI, showAuthError } from "./ui.js";
 import { initUserListener } from "./users.js";
+import { toggleLoading } from "./ui.js";
 
 export const initAuth = () => {
   const authEmail = document.getElementById("authEmail");
@@ -15,12 +17,17 @@ export const initAuth = () => {
   const btnLogout = document.getElementById("btnLogout");
 
   // Auth State Listener
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      hideAuthUI();
-      initUserListener(user);
-    } else {
-      showAuthUI();
+  auth.onAuthStateChanged(async (user) => {
+    try {
+      if (user) {
+        store.setLoading(true);
+        await initUserListener(user);
+        hideAuthUI();
+      } else {
+        showAuthUI();
+      }
+    } finally {
+      store.setLoading(false);
     }
   });
   // Signup Handler

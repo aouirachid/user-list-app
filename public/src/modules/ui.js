@@ -49,3 +49,10 @@ export const submitButton = (text) => {
   const btnSubmit = document.getElementById("btnSubmit");
   btnSubmit.textContent = text;
 };
+
+export const toggleLoading = (isLoading) => {
+  const loading = document.getElementById("loading");
+  const buttons = document.querySelectorAll("button");
+  loading.classList.toggle("hidden", !isLoading);
+  buttons.forEach((btn) => (btn.disabled = isLoading));
+};

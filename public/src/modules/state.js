@@ -1,6 +1,7 @@
 // src/modules/state.js
 let currentUsers = [];
 let listeners = [];
+let isLoading = false;
 
 export const store = {
   setUsers(users) {
@@ -16,4 +17,10 @@ export const store = {
       listeners = listeners.filter((l) => l !== listener);
     };
   },
+  setLoading: (state) => {
+    isLoading = state;
+    listeners.forEach((listener) => listener());
+  },
+  getLoading: () => isLoading,
 };
+

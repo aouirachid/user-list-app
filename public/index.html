@@ -21,6 +21,7 @@
       </form>
       <div id="authFeedback"></div>
     </div>
+    
     <div id="mainContent" style="display: none">
       <h1>User list</h1>
       <input
@@ -35,6 +36,10 @@
         <button type="submit" id="btnSubmit">Add User</button>
       </form>
       <div class="feedback" id="feedback"></div>
+      <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>loading ....</p>
+      </div>
       <button id="btnRefresh">Refresh data</button>
       <button id="btnLogout">Logout</button>
       <div id="userContainer"></div>
